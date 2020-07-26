@@ -1,0 +1,96 @@
+﻿@model cloudscribe.Pagination.Models.PagedResult<CarsApp.Models.Car>
+
+@{
+    ViewData["Title"] = "Index";
+
+    ViewData["Controller"] = "Cars";
+    ViewData["Action"] = "Index";
+
+}
+
+<h1 class="cars-heading">List of cars</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-controller="Cars" asp-action="Index" method="get">
+    <div>
+        <p>
+            Manufacturer: <input type="text" name="SearchString" value="@ViewBag.currentFilter" />
+            <input type="submit" value="Filter" /> |
+            <a asp-action="Index">Remove Filter</a>
+
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Full Model Name
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.ManufacturerSortParm" asp-route-pageNumber="@Model.PageNumber">Manufacturer</a>
+            </th>
+            <th>
+                Model
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.ClassOfCarSortParm">Class</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.OriginCountrySortParm">Country of origin</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.HeightSortParm">Height</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.LengthSortParm">Length</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.WidthSortParm">Width</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Data)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DisplayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Manufacturer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModelOfCar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassOfCar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OriginCountry)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Height)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Length)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Width)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<partial name="_PaginationPartial" view-data="ViewData" model="Model" />
+
