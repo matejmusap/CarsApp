@@ -21,7 +21,7 @@ namespace CarsApp.Controllers
         }
 
         // GET: Cars
-        public async Task<IActionResult> Index(string sortOrder, string searchString, int pageNumber = 1, int pageSize = 4)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, int pageNumber = 1, int pageSize = 3)
         {
             ViewBag.ManufacturerSortParm = String.IsNullOrEmpty(sortOrder) ? "manufacturer_desc" : "";
             ViewBag.WidthSortParm = sortOrder == "Width" ? "Width_desc" : "Width";
